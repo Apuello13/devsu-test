@@ -1,0 +1,96 @@
+<div class="flex align-items-center justify-content-center">
+  <div class="card">
+    <div class="card-title text-center">Formulario de Registro</div>
+    <form [formGroup]="productForm" (ngSubmit)="save()">
+      <div class="box">
+        <label>Id</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="id"
+          [ngClass]="{
+            'form-control-error': isFieldInvalid('id') || isInvalidId
+          }"
+          (change)="checkId()"
+        />
+        <span
+          [ngClass]="{ 'show-error': isFieldInvalid('id') || isInvalidId }"
+          class="error"
+          >{{ isInvalidId ? "Id no válido!" : "Este campo es requerido" }}</span
+        >
+      </div>
+      <div class="box">
+        <label>Nombre</label>
+        <input
+          type="text"
+          class="form-control form-control-error"
+          formControlName="name"
+          [ngClass]="{ 'form-control-error': isFieldInvalid('name') }"
+        />
+        <span [ngClass]="{ 'show-error': isFieldInvalid('name') }" class="error"
+          >Este campo es requerido</span
+        >
+      </div>
+      <div class="box">
+        <label>Descripción</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="description"
+          [ngClass]="{ 'form-control-error': isFieldInvalid('description') }"
+        />
+        <span
+          [ngClass]="{ 'show-error': isFieldInvalid('description') }"
+          class="error"
+          >Este campo es requerido</span
+        >
+      </div>
+      <div class="box">
+        <label>Logo</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="logo"
+          [ngClass]="{ 'form-control-error': isFieldInvalid('logo') }"
+        />
+        <span [ngClass]="{ 'show-error': isFieldInvalid('logo') }" class="error"
+          >Este campo es requerido</span
+        >
+      </div>
+      <div class="box">
+        <label>Fecha Liberación</label>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="date_release"
+          [ngClass]="{ 'form-control-error': isFieldInvalid('date_release') }"
+          (change)="setDateRevision()"
+        />
+        <span
+          [ngClass]="{ 'show-error': isFieldInvalid('date_release') }"
+          class="error"
+          >Este campo es requerido</span
+        >
+      </div>
+      <div class="box">
+        <label>Fecha Revisión</label>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="date_revision"
+        />
+        <span class="error">Este campo es requerido</span>
+      </div>
+      <div class="controls flex align-items-center justify-content-around">
+        <button type="button" class="btn btn-secondary">Reiniciar</button>
+        <button
+          type="submit"
+          [disabled]="productForm.invalid || isInvalidId"
+          class="btn btn-primary"
+        >
+          Enviar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

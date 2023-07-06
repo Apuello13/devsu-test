@@ -1,0 +1,67 @@
+<div class="flex align-items-center justify-content-between">
+  <input
+    placeholder="Search..."
+    type="text"
+    class="form-control"
+    (keyup)="search($event)"
+  />
+  <button routerLink="./form" class="btn btn-primary">Agregar</button>
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripción</th>
+        <th>Fecha de liberación</th>
+        <th>Fecha de reestructuración</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of rows">
+        <td class="logo text-center">
+          <img [src]="product.logo" />
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>
+          {{ product.date_release | date : dateFormatt }}
+        </td>
+        <td>
+          {{ product.date_revision | date : dateFormatt }}
+        </td>
+        <td>
+          <div class="dots pointer">
+            <div class="menu">
+              <ul>
+                <li (click)="goFromToEdit(product)">Editar</li>
+                <li (click)="confirmDelete(product.id)">Eliminar</li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6">
+          <div class="flex align-items-center justify-content-between">
+            <span>{{ rows.length }} Resultados</span>
+            <div class="select-wrapper">
+              <select
+                (change)="setCurrentSizePage($event)"
+                class="form-control"
+              >
+                <option *ngFor="let size of sizesPages" [value]="size">
+                  {{ size }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
